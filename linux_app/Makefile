@@ -85,7 +85,7 @@ $(OBJ_DIR)/$(NAME_MODULE): $(OBJ)
 copy:
 	@echo ------------ copy app ------------
 #	cp source/CameraControllerApi/resources/./* $(OBJ_DIR)/
-#	scp -r ./scrip/./* pi@192.168.10.22:/home/pi/linux_app
+	scp -r build_Orange_pi/Orange_pi root@192.168.1.14:/root
 
 .PHONY: flash
 flash:

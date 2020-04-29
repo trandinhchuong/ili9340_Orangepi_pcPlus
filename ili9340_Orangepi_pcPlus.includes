@@ -1,0 +1,7 @@
+linux_app/source/app
+linux_app/source/driver
+linux_app/source/driver/example
+linux_app/source/driver/ili9340
+linux_app/source/driver/ILI9341
+linux_app/source/driver/libSSD1306/examples
+linux_app/source/driver/libSSD1306/lib
