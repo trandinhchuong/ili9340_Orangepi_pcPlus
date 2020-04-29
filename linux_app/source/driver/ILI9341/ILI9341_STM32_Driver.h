@@ -80,30 +80,49 @@
 //
 //-----------------------------------
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 #ifndef ILI9341_STM32_DRIVER_H
 #define ILI9341_STM32_DRIVER_H
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <unistd.h>
+#include <time.h>
+#include <sys/time.h>
+#include <unistd.h>
 
-#include "stm32f7xx_hal.h"
+#include "../spi.h"
+
+// define pin usr space
+//  WPI | Physical | SYS
+#define DC_Pin   0  //  0   |   11     | PA1-1
+#define RST_Pin  2  //  2   |   13     | PA0-0
+#define CS_Pin  67  // 10   |   24     | PC3-
+#define LED_Pin  3  //  3   |   15     | PA3-3
+
+//PC0 GPIO64
+#define SPI_DEVICE "/dev/spidev0.0"
+#define SPI_SPEED  32000000
+
+extern spi_t HSPI_INSTANCE;
 
 
-#define ILI9341_SCREEN_HEIGHT 240 
+#define ILI9341_SCREEN_HEIGHT   240
 #define ILI9341_SCREEN_WIDTH 	320
 
-//SPI INSTANCE
-#define HSPI_INSTANCE							&hspi5
 
-//CHIP SELECT PIN AND PORT, STANDARD GPIO
-#define LCD_CS_PORT								GPIOC
 #define LCD_CS_PIN								CS_Pin
-
-//DATA COMMAND PIN AND PORT, STANDARD GPIO
-#define LCD_DC_PORT								GPIOC
 #define LCD_DC_PIN								DC_Pin
-
-//RESET PIN AND PORT, STANDARD GPIO
-#define	LCD_RST_PORT							GPIOC
 #define	LCD_RST_PIN								RST_Pin
+#define	LCD_LED_PIN								LED_Pin
+
+
 
 
 #define BURST_MAX_SIZE 	500
@@ -132,7 +151,7 @@
 #define SCREEN_HORIZONTAL_1		1
 #define SCREEN_VERTICAL_2			2
 #define SCREEN_HORIZONTAL_2		3
-
+void HAL_Delay(uint32_t t );
 void ILI9341_SPI_Init(void);
 void ILI9341_SPI_Send(unsigned char SPI_Data);
 void ILI9341_Write_Command(uint8_t Command);
@@ -154,3 +173,6 @@ void ILI9341_Draw_Vertical_Line(uint16_t X, uint16_t Y, uint16_t Height, uint16_
 	
 #endif
 
+#ifdef __cplusplus
+}
+#endif

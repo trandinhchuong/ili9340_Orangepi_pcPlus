@@ -48,7 +48,9 @@
 #include "ILI9341_STM32_Driver.h"
 #include "ILI9341_GFX.h"
 #include "5x5_font.h"
-#include "spi.h"
+
+
+#include "../spi.h"
 
 /*Draw hollow circle at X,Y location with specified radius and colour. X and Y represent circles center */
 void ILI9341_Draw_Hollow_Circle(uint16_t X, uint16_t Y, uint16_t Radius, uint16_t Colour)
@@ -278,8 +280,8 @@ void ILI9341_Draw_Image(const char* Image_Array, uint8_t Orientation)
 		ILI9341_Set_Rotation(SCREEN_HORIZONTAL_1);
 		ILI9341_Set_Address(0,0,ILI9341_SCREEN_WIDTH,ILI9341_SCREEN_HEIGHT);
 			
-		HAL_GPIO_WritePin(GPIOC, DC_Pin, GPIO_PIN_SET);	
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_RESET);
+        gpio_value(DC_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_RESET);
 		
 		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
 		uint32_t counter = 0;
@@ -288,19 +290,20 @@ void ILI9341_Draw_Image(const char* Image_Array, uint8_t Orientation)
 				for(uint32_t k = 0; k< BURST_MAX_SIZE; k++)
 				{
 					Temp_small_buffer[k]	= Image_Array[counter+k];		
-				}						
-				HAL_SPI_Transmit(&hspi5, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);	
+				}							                
+                spi_write(&HSPI_INSTANCE, (unsigned char*)Temp_small_buffer,BURST_MAX_SIZE);
+
 				counter += BURST_MAX_SIZE;			
 		}
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_SET);
 	}
 	else if(Orientation == SCREEN_HORIZONTAL_2)
 	{
 		ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
 		ILI9341_Set_Address(0,0,ILI9341_SCREEN_WIDTH,ILI9341_SCREEN_HEIGHT);
 			
-		HAL_GPIO_WritePin(GPIOC, DC_Pin, GPIO_PIN_SET);	
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_RESET);
+        gpio_value(DC_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_RESET);
 		
 		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
 		uint32_t counter = 0;
@@ -310,18 +313,19 @@ void ILI9341_Draw_Image(const char* Image_Array, uint8_t Orientation)
 				{
 					Temp_small_buffer[k]	= Image_Array[counter+k];		
 				}						
-				HAL_SPI_Transmit(&hspi5, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);	
+
+                spi_write(&HSPI_INSTANCE, (unsigned char*)Temp_small_buffer,BURST_MAX_SIZE);
 				counter += BURST_MAX_SIZE;			
 		}
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_SET);
 	}
 	else if(Orientation == SCREEN_VERTICAL_2)
 	{
 		ILI9341_Set_Rotation(SCREEN_VERTICAL_2);
 		ILI9341_Set_Address(0,0,ILI9341_SCREEN_HEIGHT,ILI9341_SCREEN_WIDTH);
 			
-		HAL_GPIO_WritePin(GPIOC, DC_Pin, GPIO_PIN_SET);	
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_RESET);
+        gpio_value(DC_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_RESET);
 		
 		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
 		uint32_t counter = 0;
@@ -331,18 +335,18 @@ void ILI9341_Draw_Image(const char* Image_Array, uint8_t Orientation)
 				{
 					Temp_small_buffer[k]	= Image_Array[counter+k];		
 				}						
-				HAL_SPI_Transmit(&hspi5, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);	
+                spi_write(&HSPI_INSTANCE, (unsigned char*)Temp_small_buffer,BURST_MAX_SIZE);
 				counter += BURST_MAX_SIZE;			
 		}
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_SET);
 	}
 	else if(Orientation == SCREEN_VERTICAL_1)
 	{
 		ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
 		ILI9341_Set_Address(0,0,ILI9341_SCREEN_HEIGHT,ILI9341_SCREEN_WIDTH);
 			
-		HAL_GPIO_WritePin(GPIOC, DC_Pin, GPIO_PIN_SET);	
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_RESET);
+        gpio_value(DC_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_RESET);
 		
 		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
 		uint32_t counter = 0;
@@ -351,11 +355,11 @@ void ILI9341_Draw_Image(const char* Image_Array, uint8_t Orientation)
 				for(uint32_t k = 0; k< BURST_MAX_SIZE; k++)
 				{
 					Temp_small_buffer[k]	= Image_Array[counter+k];		
-				}						
-				HAL_SPI_Transmit(&hspi5, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);	
+                }
+                spi_write(&HSPI_INSTANCE, (unsigned char*)Temp_small_buffer,BURST_MAX_SIZE);
 				counter += BURST_MAX_SIZE;			
 		}
-		HAL_GPIO_WritePin(GPIOC, CS_Pin, GPIO_PIN_SET);
+        gpio_value(CS_Pin, GPIO_PIN_SET);
 	}
 }
 

@@ -44,10 +44,25 @@
 //
 //-----------------------------------
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #ifndef ILI9341_GFX_H
 #define ILI9341_GFX_H
 
-#include "stm32f7xx_hal.h"
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <unistd.h>
+#include <time.h>
+#include <sys/time.h>
+
+#include "../gpio.h"
+
 
 #define HORIZONTAL_IMAGE	0
 #define VERTICAL_IMAGE		1
@@ -64,4 +79,8 @@ void ILI9341_Draw_Filled_Rectangle_Size_Text(uint16_t X0, uint16_t Y0, uint16_t 
 //65K colour (2Bytes / Pixel)
 void ILI9341_Draw_Image(const char* Image_Array, uint8_t Orientation);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif
