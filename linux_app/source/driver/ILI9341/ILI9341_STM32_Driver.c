@@ -90,11 +90,12 @@
 volatile uint16_t LCD_HEIGHT = ILI9341_SCREEN_HEIGHT;
 volatile uint16_t LCD_WIDTH	 = ILI9341_SCREEN_WIDTH;
 
-void HAL_Delay(uint32_t t )
-{
-    for(int i=0;i<999;i++)
-         usleep(t);
-
+void HAL_Delay(uint32_t tms )
+{   
+        struct timeval tv;
+        tv.tv_sec  = tms / 1000;
+        tv.tv_usec = (tms % 1000) * 1000;
+        select (0, NULL, NULL, NULL, &tv);
 }
 
 
@@ -472,9 +473,7 @@ gpio_value( LCD_CS_PIN, GPIO_PIN_SET);
 //YDATA
 gpio_value( LCD_CS_PIN, GPIO_PIN_RESET);
 unsigned char Temp_Buffer1[4] = {Y>>8,Y, (Y+1)>>8, (Y+1)};
-
 spi_write(&HSPI_INSTANCE, Temp_Buffer1, 4);
-
 gpio_value( LCD_CS_PIN, GPIO_PIN_SET);
 
 //ADDRESS	
@@ -487,9 +486,7 @@ gpio_value( LCD_CS_PIN, GPIO_PIN_SET);
 //COLOUR	
 gpio_value( LCD_CS_PIN, GPIO_PIN_RESET);
 unsigned char Temp_Buffer2[2] = {Colour>>8, Colour};
-
 spi_write(&HSPI_INSTANCE, Temp_Buffer2, 2);
-
 gpio_value( LCD_CS_PIN, GPIO_PIN_SET);
 	
 }

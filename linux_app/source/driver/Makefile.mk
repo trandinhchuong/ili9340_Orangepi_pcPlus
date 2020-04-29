@@ -1,4 +1,4 @@
-include source/driver/ili9340/Makefile.mk
+#include source/driver/ili9340/Makefile.mk
 #-include source/driver/libSSD1306/lib/Makefile.mk
 include source/driver/ILI9341/Makefile.mk
 CXXFLAGS += -I./source/driver/

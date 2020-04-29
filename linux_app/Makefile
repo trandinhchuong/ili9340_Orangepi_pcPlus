@@ -16,8 +16,8 @@ CC		= arm-linux-gnueabihf-gcc
 OBJ_DIR		= build_$(NAME_MODULE)
 
 OPTIMIZE_OPTION	=	-O3
-WARNNING_OPTION	+=	-Werror -Wno-error -W -Wno-missing-field-initializers
-
+WARNNING_OPTION	+=	-Werror -Wno-error -W -Wno-missing-field-initializers \
+                        -Wno-pointer-to-int-cast
 
 -include source/app/Makefile.mk
 -include source/driver/Makefile.mk
@@ -39,6 +39,9 @@ CXXFLAGS	+= $(API_OPTION)        \
 		-pipe			\
 		-lwiringPi              \
                 -DSPI -DWPI             \
+                -DSPI_DEBUG             \
+                -Os                     \
+                -pthread                \
 
 
 # Library pathsls

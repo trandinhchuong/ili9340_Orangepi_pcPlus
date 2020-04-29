@@ -2,6 +2,10 @@
  * Simple Linux wrapper for access to /dev/spidev
  * File: "spi.h"
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 #ifndef SPI_H
 #define SPI_H
@@ -75,4 +79,6 @@ int spi_exchange(spi_t *self, char *rx_buf, const char *tx_buf, int len);
 
 /*** end of "spi.h" file ***/
 
-
+#ifdef __cplusplus
+}
+#endif

@@ -100,9 +100,9 @@ extern "C" {
 #include "../spi.h"
 
 // define pin usr space
-//  WPI | Physical | SYS
-#define DC_Pin   0  //  0   |   11     | PA1-1
-#define RST_Pin  2  //  2   |   13     | PA0-0
+                    //  WPI | Physical | SYS
+#define DC_Pin   1  //  0   |   11     | PA1-1
+#define RST_Pin  0  //  2   |   13     | PA0-0
 #define CS_Pin  67  // 10   |   24     | PC3-
 #define LED_Pin  3  //  3   |   15     | PA3-3
 
@@ -151,7 +151,7 @@ extern spi_t HSPI_INSTANCE;
 #define SCREEN_HORIZONTAL_1		1
 #define SCREEN_VERTICAL_2			2
 #define SCREEN_HORIZONTAL_2		3
-void HAL_Delay(uint32_t t );
+void HAL_Delay(uint32_t tms );
 void ILI9341_SPI_Init(void);
 void ILI9341_SPI_Send(unsigned char SPI_Data);
 void ILI9341_Write_Command(uint8_t Command);

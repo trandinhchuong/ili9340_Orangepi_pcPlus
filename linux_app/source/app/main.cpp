@@ -35,7 +35,9 @@ int main()
         for(uint16_t i = 0; i < 10; i++)
             {
                 ILI9341_Fill_Screen(WHITE);
+                HAL_Delay(100);
                 ILI9341_Fill_Screen(BLACK);
+                HAL_Delay(100);
             }
 
         HAL_Delay(100);
