@@ -1,21 +1,21 @@
 //cc -o demo_basic demo_basic.c fontx.c ili9340.c -lwiringPi -lm -lpthread -DSPI -DWPI
 
-
+extern "C" {
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-
+}
 
 
 #include <unistd.h>
 #include <time.h>
 #include <sys/time.h>
 
-#include "../driver/ILI9341/ILI9341_GFX.h"
-#include "../driver/ILI9341/ILI9341_OP_Driver.h"
-#include "../driver/ILI9341/snow_tiger.h"
+#include "ILI9341_GFX.h"
+#include "ILI9341_OP_Driver.h"
+#include "snow_tiger.h"
 void test_fps();
 
 
@@ -24,33 +24,13 @@ int main()
     ILI9341_Init();
     HAL_Delay(2000);
     ILI9341_Draw_Image((const char*)snow_tiger, SCREEN_VERTICAL_1);
-
-
     HAL_Delay(5000);
+
 
 
     test_fps();
 
-    while(1)
 
-    {
-        char Temp_Buffer_text[40];
-        for(uint16_t i = 0; i <= 1000; i++)
-        {
-        sprintf(Temp_Buffer_text, "Counting: %d", i);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 10, BLACK, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 30, BLUE, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 50, RED, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 70, GREEN, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 90, BLACK, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 110, BLUE, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 130, RED, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 150, GREEN, 2, WHITE);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 170, WHITE, 2, BLACK);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 190, BLUE, 2, BLACK);
-        ILI9341_Draw_Text(Temp_Buffer_text, 10, 210, RED, 2, BLACK);
-        }
-    }
 }
 
 long long get_timestamp() {

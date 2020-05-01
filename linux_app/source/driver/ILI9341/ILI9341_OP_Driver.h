@@ -45,7 +45,7 @@ extern "C" {
 
 //PC0 GPIO64
 #define SPI_DEVICE "/dev/spidev0.0"
-#define SPI_SPEED  32000000
+#define SPI_SPEED  48000000
 extern spi_t HSPI_INSTANCE;
 #endif
 

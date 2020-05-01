@@ -59,7 +59,7 @@ void SPI_Init()
     int SPIComPort= wiringPiSPISetup(0,   48000000);
     printf("Com: %i\n", SPIComPort);
 #else
-
+  
   int retv = spi_init(&HSPI_INSTANCE,
                        SPI_DEVICE, // filename like "/dev/spidev0.0"
                        0,          // SPI_* (look "linux/spi/spidev.h")
